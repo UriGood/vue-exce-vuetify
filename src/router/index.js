@@ -21,17 +21,17 @@ const routes = [
   },
   {
     path: '/user-detail',
-    name: 'upload-excel',
+    name: 'upload-detail',
     component: UserDetails
   },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../modules/excelUpload/pages/UserDetails')
-  }
+  // {
+  //   path: '/about',
+  //   name: 'about',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../modules/excelUpload/pages/UserDetails')
+  // }
 ]
 
 const router = new VueRouter({

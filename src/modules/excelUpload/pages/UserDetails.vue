@@ -3,9 +3,18 @@
         <v-row>
             <v-col>
                 <h1>hola</h1>
-                <v-btn @click="probarUpdate">
-                    Button
+                <v-btn @click="probarPost">
+                    Post
                 </v-btn>
+                <v-btn @click="probarDelete">
+                    Delete
+                </v-btn>
+                <v-btn @click="probarUpdate">
+                    Update
+                </v-btn>
+                <!-- <v-btn @click="probarPost">
+                    
+                </v-btn> -->
             </v-col>
         </v-row>
     </v-container>
@@ -19,44 +28,48 @@ export default {
     methods: {
 
         probarPost() {
-            let id = "64077635ed6a6c17d214e8d1";
             axios
-                .post(`http://18.224.73.103/api/users/`,{
-                    userName:"uriel"
+                .post(`http://18.224.73.103/api/users/`, {
+                    userName: "jose",
+                    date: "0",
+                    punchIn: "0",
+                    punchOut: "0"
+                }, {
+                    headers: {
+                        // remove headers
+                    }
                 })
                 .then((result) => {
                     console.log("registros insertados correctamente");
                 })
-                .catch((error)=>{
+                .catch((error) => {
                     console.log(error)
                 })
         },
         probarDelete() {
-            let id = "64077635ed6a6c17d214e8d1";
+            let id = "640d05d3427df60be95849f9";
             axios
-                .post(`http://18.224.73.103/api/users/${id}`,{
-                    userName:"uriel"
-                })
+                .delete(`http://18.224.73.103/api/users/${id}`)
                 .then((result) => {
                     console.log(result);
                 })
-                .catch((error)=>{
+                .catch((error) => {
                     console.log(error)
                 })
         },
         probarUpdate() {
-            let id = "640d0202515087d036616172";
+            let id = "640d04cd2e5ef316a4126f33";
             axios
-                .put(`http://localhost:8080/api/users/${id}`,{
-                    userName:"jose",
-                    date:"0",
-                    punchIn:"0",
-                    punchOut:"0"
+                .put(`http://18.224.73.103/api/users/${id}`, {
+                    userName: "jose",
+                    date: "0",
+                    punchIn: "0",
+                    punchOut: "0"
                 })
                 .then((result) => {
                     console.log(result);
                 })
-                .catch((error)=>{
+                .catch((error) => {
                     console.log(error)
                 })
         }
