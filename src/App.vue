@@ -1,32 +1,38 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-app-bar app color="primary" dark>
+      <router-link :to="{ name: 'listusers' }">
+        <v-btn text>
+          <span class="mr-2">Lista de usuarios</span>
+        </v-btn>
+      </router-link>
+      <router-link :to="{ name: 'upload-excel' }">
+        <v-btn text>
+          <span class="mr-2">Cargar excel</span>
+        </v-btn>
+      </router-link>
+
+      <v-spacer></v-spacer>
+
+      <v-btn href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank" text>
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-nav {
-  padding: 30px;
-}
+export default {
+  name: 'App',
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+  data: () => ({
+    //
+  }),
+};
+</script>
