@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 // import HomeView from '../views/HomeView.vue'
 
 import UploadExcel from '../modules/excelUpload/pages/UploadExcel'
-// import UserDetails from '../modules/excelUpload/pages/UserDetails'
+import UserDetails from '../modules/excelUpload/pages/UserDetails'
 import UsersList from '../modules/excelUpload/pages/UsersList'
 
 Vue.use(VueRouter)
@@ -18,6 +18,11 @@ const routes = [
     path: '/upload-excel',
     name: 'upload-excel',
     component: UploadExcel
+  },
+  {
+    path: '/user-detail',
+    name: 'upload-excel',
+    component: UserDetails
   },
   {
     path: '/about',

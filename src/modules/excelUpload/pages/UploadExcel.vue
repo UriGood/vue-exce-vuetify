@@ -56,9 +56,9 @@ export default {
         }, 
         inserRows(body) {
             axios
-                .post("http://18.224.73.103/api/users-multiple",body)
+                .post("http://18.224.73.103/api/users-multiple/",body)
                 .then((result) => {
-                    console.log("registros insertados correctamente");
+                    console.log(result);
                 })
                 .catch((error)=>{
                     console.log(error)
