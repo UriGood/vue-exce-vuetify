@@ -6,7 +6,7 @@
                 <!-- <v-file-input label="Selecciona tu archivo excel " @change="previewFiles" outlined dense></v-file-input> -->
                 <input type="file" @change="subirExcel" id="archivoExcel" />
                 <v-data-table :headers="cabecera" :items="arrayObjetos">
-
+                    
                 </v-data-table>
                 <div class="text-center">
                     <v-btn color="primary" @click="inserRows">
@@ -22,7 +22,7 @@
 import axios from 'axios'
 import readXlsFile from 'read-excel-file'
 export default {
-    name: 'App',
+    name: 'UploadExcel',
 
     data: () => ({
         value: "",
@@ -33,6 +33,7 @@ export default {
             { text: 'User Name', value: 'userName' },
             { text: 'Date', value: 'date' },
             { text: 'Punch In', value: 'punchIn' },
+            { text: 'Punch Out', value: 'punchOut' },
             { text: 'Punch Out', value: 'punchOut' },
         ],
         arrayObjetos: []
@@ -53,14 +54,14 @@ export default {
                 }
 
             })
-        }, 
+        },
         inserRows(body) {
             axios
-                .post("http://18.224.73.103/api/users-multiple/",body)
+                .post("http://18.224.73.103:8080/api/users-multiple/", this.arrayObjetos)
                 .then((result) => {
                     console.log(result);
                 })
-                .catch((error)=>{
+                .catch((error) => {
                     console.log(error)
                 })
         }

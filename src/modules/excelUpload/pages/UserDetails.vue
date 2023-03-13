@@ -29,11 +29,11 @@ export default {
 
         probarPost() {
             axios
-                .post(`http://18.224.73.103/api/users/`, {
-                    userName: "jose",
-                    date: "0",
-                    punchIn: "0",
-                    punchOut: "0"
+                .post(`http://18.224.73.103:8080/api/users/`, {
+                    userName: "Joshuita Martinez",
+                    date: "20/02/2022",
+                    punchIn: "9:00",
+                    punchOut: "6:00"
                 }, {
                     headers: {
                         // remove headers
@@ -47,9 +47,9 @@ export default {
                 })
         },
         probarDelete() {
-            let id = "640d05d3427df60be95849f9";
+            let id = "640e44ef71a4d38b7c03dbe1";
             axios
-                .delete(`http://18.224.73.103/api/users/${id}`)
+                .delete(`http://18.224.73.103:8080/api/users/${id}`)
                 .then((result) => {
                     console.log(result);
                 })
@@ -58,10 +58,10 @@ export default {
                 })
         },
         probarUpdate() {
-            let id = "640d04cd2e5ef316a4126f33";
+            let id = "640e4db1c248838708d26991";
             axios
-                .put(`http://18.224.73.103/api/users/${id}`, {
-                    userName: "jose",
+                .put(`http://18.224.73.103:8080/api/users/${id}`, {
+                    userName: "Mario Emiliano",
                     date: "0",
                     punchIn: "0",
                     punchOut: "0"
