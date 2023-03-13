@@ -12,8 +12,8 @@
                     <template v-slot:item.actions="{ item, index }">
                         <span class="btn-dialog" style="color:green; padding-bottom: 55px;"
                             @click="dialogDelete(index)">Borrar</span><br />
-                        <!-- <span class="btn-dialog" style="color:red" @click="dialogEdit(item)">Editar</span><br />
-                        <span class="btn-dialog" style="color:purple" @click="dialogView(item)"> Ver detalles</span> -->
+                        <span class="btn-dialog" style="color:red" @click="dialogEdit(item,index)">Editar</span><br />
+                        <!-- <span class="btn-dialog" style="color:purple" @click="dialogView(item)"> Ver detalles</span> -->
                     </template>
                 </v-data-table>
                 <div class="text-center">
@@ -36,6 +36,40 @@
                     </v-card-actions>
                 </v-card>
             </template>
+        </v-dialog>
+
+        <v-dialog v-model="dialogE" width="600px">
+            <v-card>
+                <v-card-title>
+                    <span class="text-h5 text-center">Editando el registro "{{ id }}"</span>
+                </v-card-title>
+                <v-form>
+                    <v-container>
+                        <v-row>
+                            <v-col cols="12" md="6">
+                                <v-label>Name</v-label>
+                                <v-text-field v-model="userName" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <v-label>Date</v-label>
+                                <v-text-field v-model="date" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <v-label>Punch In</v-label>
+                                <v-text-field v-model="punchIn" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <v-label>Punch Out</v-label>
+                                <v-text-field v-model="punchOut" required></v-text-field>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-form>
+                <v-card-text class="text-center">
+                    <v-btn class="primary" style="margin-right: 15px;" @click="editUsers">Aceptar</v-btn>
+                    <v-btn class="secondary" @click="dialogE = false">Cancelar</v-btn>
+                </v-card-text>
+            </v-card>
         </v-dialog>
     </v-container>
 </template>
@@ -65,13 +99,48 @@ export default {
         ],
         arrayObjetos: [],
         input: null,
-        dialog: null
+        dialog: null,
+        id: null,
+        userName: null,
+        item: null,
+        date: null,
+        punchIn: null,
+        punchOut: null,
+        dialogE: null,
+        index:null
     }),
     methods: {
         subirExcel() {
+            const schema = {
+                'User ID': {
+                    prop: 'userId',
+                    type: String
+                },
+                'User Name': {
+                    prop: 'userName',
+                    type: String,
+                    required: true
+                },
+                'Date': {
+                    prop: 'date',
+                    type: (value) => {
+                        const fecha = value.toString()
+                        return fecha;
+                    }
+                },
+                // 'Punch In': {
+                //     prop: 'punchIn',
+                //     type: String
+                // },
+                // 'Punch Out': {
+                //     prop: 'punchOut',
+                //     type: String,
+                // }
+            }
             this.input = document.getElementById("archivoExcel");
-            readXlsFile(this.input.files[0]).then((rows) => {
+            readXlsFile(this.input.files[0], { dateFormat: 'yyyy/mm/dd' }).then((rows) => {
                 this.items = rows
+                console.log(rows)
                 for (let i = 1; i < this.items.length; i++) {
                     // console.log(this.items[i][2]);
                     this.arrayObjetos.push({
@@ -83,7 +152,7 @@ export default {
                     })
                 }
             })
-            console.log(this.arrayObjetos)
+            // console.log(this.arrayObjetos)
         },
         deleteDocument() {
             console.log("delete document");
@@ -116,6 +185,22 @@ export default {
                 let input = document.getElementById("archivoExcel");
                 console.log(input.value = '')
             }
+        },
+        dialogEdit(item,index) {
+            this.dialogE = true;
+            this.id = item._id;
+            this.userName = item.userName;
+            this.date = item.date;
+            this.punchIn = item.punchIn;
+            this.punchOut = item.punchOut;
+            this.index = index
+        },
+        editUsers() {
+            this.arrayObjetos[this.index].userName = this.userName;
+            this.arrayObjetos[this.index].date = this.date;
+            this.arrayObjetos[this.index].punchIn = this.punchIn;
+            this.arrayObjetos[this.index].punchOut = this.punchOut;
+            this.dialogE = false;
         }
     }
 };
